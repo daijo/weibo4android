@@ -40,10 +40,10 @@ public class OAuthUpdateProfile {
 					System.exit(-1);
 				}
 				
-				User user = weibo.updateProfileImage(file);
+				//User user = weibo.updateProfileImage(file); remove dhjo
 
-				System.out.println("Successfully upload the status to ["
-						+ user.getName() + "].");
+				/*System.out.println("Successfully upload the status to ["
+						+ user.getName() + "].");*/
 				
 			} catch (Exception e1) {
 				e1.printStackTrace();

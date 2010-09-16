@@ -40,7 +40,6 @@ import org.w3c.dom.Element;
 
 import weibo4j.http.AccessToken;
 import weibo4j.http.HttpClient;
-import weibo4j.http.ImageItem;
 import weibo4j.http.PostParameter;
 import weibo4j.http.RequestToken;
 import weibo4j.http.Response;
@@ -1300,19 +1299,19 @@ public class Weibo extends WeiboSupport implements java.io.Serializable {
      * @since Weibo4J 2.0.1
      * @see <a href="http://open.t.sina.com.cn/wiki/index.php/Statuses/upload">statuses/upload </a>
      */
-    public Status uploadStatus(String status,ImageItem item) throws WeiboException {
+    /*public Status uploadStatus(String status,ImageItem item) throws WeiboException {
     	return new Status(http.multPartURL(getBaseURL() + "statuses/upload.json",
                 new PostParameter[]{new PostParameter("status", status), new PostParameter("source", source)},item, true));
         /*return new Status(http.multPartURL(getBaseURL() + "statuses/upload.xml",
                 new PostParameter[]{new PostParameter("status", status), new PostParameter("source", source)},item, true), this);*/
-    }
+    //} remove dhjo
 
-    public Status uploadStatus(String status,File file) throws WeiboException {
+    /*public Status uploadStatus(String status,File file) throws WeiboException {
     	return new Status(http.multPartURL("pic",getBaseURL() + "statuses/upload.json",
-                new PostParameter[]{new PostParameter("status", status), new PostParameter("source", source)},file, true));
+                new PostParameter[]{new PostParameter("status", status), new PostParameter("source", source)},file, true));*/
         /*return new Status(http.multPartURL(getBaseURL() + "statuses/upload.xml",
                 new PostParameter[]{new PostParameter("status", status), new PostParameter("source", source)},item, true), this);*/
-    }
+    //} removed dhjo 
 
     /**
      * Updates the user's status.
@@ -2456,10 +2455,10 @@ public class Weibo extends WeiboSupport implements java.io.Serializable {
      * @return
      * @throws WeiboException
      */
-    public User updateProfileImage(File image)throws WeiboException {
+    /*public User updateProfileImage(File image)throws WeiboException {
     	return new User(http.multPartURL("image",getBaseURL() + "account/update_profile_image.json",
                 null,image, true).asJSONObject());
-    }
+    }*/ //removed dhjo
 
     /**
      * Returns the remaining number of API requests available to the requesting user before the API limit is reached for the current hour. Calls to rate_limit_status do not count against the rate limit.  If authentication credentials are provided, the rate limit status for the authenticating user is returned.  Otherwise, the rate limit status for the requester's IP address is returned.<br>
@@ -3212,7 +3211,7 @@ public class Weibo extends WeiboSupport implements java.io.Serializable {
 		//
 		Document doc = http.httpRequest(url, null, auth, httpMethod).asDocument();
 		Element root = doc.getDocumentElement();
-		return "true".equals(root.getTextContent());
+		return "true".equals(root.getFirstChild().getNodeValue());
 	}
 
 	/**
@@ -3235,7 +3234,7 @@ public class Weibo extends WeiboSupport implements java.io.Serializable {
 		//
 		Document doc = http.httpRequest(url, null, auth, httpMethod).asDocument();
 		Element root = doc.getDocumentElement();
-		return "true".equals(root.getTextContent());
+		return "true".equals(root.getFirstChild().getNodeValue());
 	}
 
     /* Help Methods */

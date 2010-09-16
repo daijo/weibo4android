@@ -31,7 +31,6 @@ import weibo4j.WeiboException;
 import weibo4j.Status;
 import weibo4j.http.AccessToken;
 import weibo4j.http.RequestToken;
-import weibo4j.util.BareBonesBrowserLaunch;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -68,7 +67,7 @@ public class OAuthUpdate {
             while (null == accessToken) {
                 System.out.println("Open the following URL and grant access to your account:");
                 System.out.println(requestToken.getAuthorizationURL());
-                BareBonesBrowserLaunch.openURL(requestToken.getAuthorizationURL());
+                //BareBonesBrowserLaunch.openURL(requestToken.getAuthorizationURL()); //removed dhjo
                 System.out.print("Hit enter when it's done.[Enter]:");
                 
                 String pin = br.readLine();

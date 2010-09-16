@@ -41,10 +41,10 @@ public class OAuthUploadByFile {
 				}
 				
 				String msg = URLEncoder.encode("中文内容", "UTF-8");
-				Status status = weibo.uploadStatus(msg + "cvvbqwe1343", file);
+				/*Status status = weibo.uploadStatus(msg + "cvvbqwe1343", file);
 
 				System.out.println("Successfully upload the status to ["
-						+ status.getText() + "].");
+						+ status.getText() + "].");*/ // removed dhjo
 				
 			} catch (Exception e1) {
 				e1.printStackTrace();

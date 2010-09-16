@@ -39,12 +39,9 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.security.AccessControlException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.activation.MimetypesFileTypeMap;
 
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.methods.PostMethod;
@@ -420,7 +417,10 @@ public class HttpClient implements java.io.Serializable {
 
     public Response post(String url, PostParameter[] postParameters,
                          boolean authenticated) throws WeiboException {
-    	PostParameter[] newPostParameters=Arrays.copyOf(postParameters, postParameters.length+1);
+    	PostParameter[] newPostParameters = new PostParameter[postParameters.length+1];
+		for(int i = 0; i < postParameters.length; i++) {
+			newPostParameters[i] = postParameters[i];
+		}
     	newPostParameters[ postParameters.length]=new PostParameter("source", Weibo.CONSUMER_KEY);
         return httpRequest(url, newPostParameters, authenticated);
     }
@@ -429,7 +429,7 @@ public class HttpClient implements java.io.Serializable {
     	return httpRequest(url, null, authenticated, "DELETE");
     }
  	
- 	public Response multPartURL(String url,  PostParameter[] params,ImageItem item,boolean authenticated) throws WeiboException{
+ 	/*public Response multPartURL(String url,  PostParameter[] params,ImageItem item,boolean authenticated) throws WeiboException{
   		PostMethod post = new PostMethod(url);
     	try {
     		org.apache.commons.httpclient.HttpClient client = new org.apache.commons.httpclient.HttpClient();
@@ -481,9 +481,9 @@ public class HttpClient implements java.io.Serializable {
     	} finally {
     		post.releaseConnection();
     	}
-  	}
+  	}*/ //remove dhjo
  	
- 	public Response multPartURL(String fileParamName,String url,  PostParameter[] params,File file,boolean authenticated) throws WeiboException{
+ 	/*public Response multPartURL(String fileParamName,String url,  PostParameter[] params,File file,boolean authenticated) throws WeiboException{
   		PostMethod post = new PostMethod(url);
   		org.apache.commons.httpclient.HttpClient client = new org.apache.commons.httpclient.HttpClient();
     	try {
@@ -539,7 +539,7 @@ public class HttpClient implements java.io.Serializable {
     		post.releaseConnection();
     		client=null;
     	}
-  	}
+  	}*/ // MimetypesFileTypeMap not available, removed dhjo
  	private static class ByteArrayPart extends PartBase {
 		private byte[] mData;
 		private String mName;
@@ -594,7 +594,10 @@ public class HttpClient implements java.io.Serializable {
     	if (postParams != null) {
     		method = "POST";
 			len = postParams.length + 1;
-			newPostParameters = Arrays.copyOf(postParams, len);
+			newPostParameters = new PostParameter[len];
+			for(int i = 0; i < postParams.length; i++) {
+				newPostParameters[i] = postParams[i];
+			}
 			newPostParameters[postParams.length] = new PostParameter("source",
 					Weibo.CONSUMER_KEY);
     	}
